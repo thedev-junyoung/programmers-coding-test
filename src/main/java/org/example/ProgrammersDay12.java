@@ -15,11 +15,15 @@ public class ProgrammersDay12 {
         int[] arr ={1, 2, 3, 4, 5};
         int[][] intervals={{1, 3}, {0, 4}};
         solution.solution(arr,intervals);*/
-        int[] arr={1, 2, 1, 2, 1, 10, 2, 1};
-        /*
+        /*int[] arr={10, 10, 10, 2, 1, 3, 2, 2, 6};
+        *//*
         입력값 〉 [2, 2, 3]
-        기댓값 〉 [2, 2]*/
-        int[] result=solution.solution4(arr);
+        기댓값 〉 [2, 2]*//*
+        int[] result=solution.solution4(arr);*/
+
+        int[] arr={0, 1, 2, 3, 4, 5};
+        int[] query={4, 1, 2};
+        int[] result=solution.solution5(arr,query);
         System.out.println(Arrays.toString(result));
 
     }
@@ -90,24 +94,55 @@ class Solution12 {
     public int[] solution4(int[] arr) {
         int[] answer = {};
         int count=0;
-        for (int n:arr){
-            if(n==2) count++;
+        int[] index= {-1, -1};
+        for (int i=0;i<arr.length;i++){
+            if(arr[i]==2) {
+                if(index[0]==-1){
+                    index[0]=i;
+                }else {
+                    index[1]=i;
+                }
+                count++;
+            }
         }
-        if (count==1) return new int[]{-1};
+        if (count==0) return new int[]{-1};
+        if (count==1) return new int[]{2};
+        return Arrays.copyOfRange(arr,index[0],index[1]+1);
+        // 최적화
+        /*int[] index = {-1, -1};  // 첫 번째와 마지막 2의 인덱스를 추적
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 2) {
+                if (index[0] == -1) {
+                    index[0] = i;  // 첫 번째 2의 위치를 저장
+                }
+                index[1] = i;  // 마지막 2의 위치를 계속 업데이트
+            }
+        }
 
-        return answer;
+        // 2가 배열에 없으면
+        if (index[0] == -1) {
+            return new int[]{-1};  // 2가 없으므로 [-1] 반환
+        }
+
+        // 2가 포함된 가장 작은 연속된 부분 배열 반환
+        return Arrays.copyOfRange(arr, index[0], index[1] + 1);*/
     }
-    public int[] solution(int[] arr, int[] query) {
+    public int[] solution5(int[] arr, int[] query) {
         int[] answer = {};
         for (int i = 0; i < query.length; i++) {
             int idx=query[i];
-            if(i%2==0){
-                arr =Arrays.copyOfRange(arr,0,idx);
-            }else {
-
+            System.out.println("-------------------------");
+            System.out.println("i:"+i);
+            System.out.println("idx:"+idx);
+            if(i%2==0){ //짝수
+                System.out.println("짝수");
+                arr =Arrays.copyOfRange(arr,0,idx+1);
+            }else { // 홀수
+                System.out.println("홀수");
+                arr =Arrays.copyOfRange(arr,idx,arr.length);
             }
         }
-        return answer;
+        return arr;
     }
 
 

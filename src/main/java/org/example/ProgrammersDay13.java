@@ -6,6 +6,7 @@ import java.util.Arrays;
 public class ProgrammersDay13 {
     public static void main(String[] args) {
 
+
         Solution13 solution=new Solution13();
 /*        int[] num_list={5, 2, 1, 7, 5};
         int n = 2;
